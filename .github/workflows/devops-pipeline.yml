@@ -1,28 +1,8 @@
-name: DevOps-Projesi
-
-on:
-  push:
-    branches: [ "master" ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Kodlari indir
-        uses: actions/checkout@v3
-
-      - name: Java Kurulumu
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+- name: Klasorleri Listele (Hata Ayiklama)
+        run: ls -R # Bu komut GitHub'ın hangi dosyaları gördüğünü bize siyah ekranda yazdıracak
 
       - name: Java Derle
         run: |
-          javac app/MerhabaDevops.java
+          find . -name "MerhabaDevops.java" # Dosyayı otomatik bulsun
+          javac $(find . -name "MerhabaDevops.java")
           java -cp app MerhabaDevops
-
-      - name: Docker Kontrol
-        run: |
-          docker build -t test-app ./app
