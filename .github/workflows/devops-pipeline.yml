@@ -1,4 +1,28 @@
-- name: Java Kodunu Derle ve Çalıştır
+name: DevOps-Projesi
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodlari indir
+        uses: actions/checkout@v3
+
+      - name: Java Kurulumu
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Java Derle
         run: |
           javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
+
+      - name: Docker Kontrol
+        run: |
+          docker build -t test-app ./app
