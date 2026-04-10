@@ -1,8 +1,27 @@
-- name: Klasorleri Listele (Hata Ayiklama)
-        run: ls -R # Bu komut GitHub'ın hangi dosyaları gördüğünü bize siyah ekranda yazdıracak
+name: DevOps-Projesi
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodlari indir
+        uses: actions/checkout@v3
+
+      - name: Java Kurulumu
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Dosyalari Listele
+        run: ls -R
 
       - name: Java Derle
         run: |
-          find . -name "MerhabaDevops.java" # Dosyayı otomatik bulsun
-          javac $(find . -name "MerhabaDevops.java")
+          javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
