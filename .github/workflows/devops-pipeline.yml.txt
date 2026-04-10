@@ -1,29 +1,4 @@
-name: DevOps Proje Kontrolü
-
-# Ne zaman çalışsın?
-on: [push]
-
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest # GitHub'ın bize verdiği bedava Linux sunucusu
-
-    steps:
-      - name: Kodları indir
-        uses: actions/checkout@v3
-
-      - name: Java'yı Kur
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Java Kodunu Derle ve Çalıştır (Test)
+- name: Java Kodunu Derle ve Çalıştır
         run: |
-          cd app
-          javac MerhabaDevops.java
-          java MerhabaDevops
-
-      - name: Docker Imajini Olusturmayı Dene
-        run: |
-          docker build -t my-java-app ./app
-          docker build -t my-python-app ./scripts
+          javac app/MerhabaDevops.java
+          java -cp app MerhabaDevops
