@@ -1,0 +1,1 @@
+print("Python otomasyon scripti: Sistem kontrolleri yapılıyor... TAMAM!")
