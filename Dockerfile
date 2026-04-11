@@ -1,14 +1,12 @@
-# 1. Temel imajı seç (İçinde Java 17 olan hafif bir Linux)
-FROM eclipse-temurin:17-jdk-alpine
-
-# 2. Çalışma alanını belirle
-WORKDIR /proje
-
-# 3. Bilgisayarındaki her şeyi (kodlarını) bu konteynerin içine kopyala
+# 1. AŞAMA: Derleme (Build)
+FROM eclipse-temurin:17-jdk-alpine AS build
+WORKDIR /app
 COPY . .
-
-# 4. Java kodunu konteyner içinde derle
 RUN javac app/MerhabaDevops.java
 
-# 5. Konteyner çalıştığında ne yapacağını söyle
-CMD ["java", "-cp", "app", "MerhabaDevops"]
+# 2. AŞAMA: Çalıştırma (Run)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+# Sadece derlenmiş dosyayı ilk aşamadan buraya kopyalıyoruz
+COPY --from=build /app/app/MerhabaDevops.class ./app/
+CMD ["java", "-cp", ".", "app.MerhabaDevops"]
