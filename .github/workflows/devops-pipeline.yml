@@ -21,9 +21,10 @@ jobs:
       - name: Dosyalari Listele
         run: ls -R
 
-      - name: Java Derle
+      - name: Java Derle ve Calistir
         run: |
           javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
-          - name: Docker Imajini Hazirla
+
+      - name: Docker Imajini Hazirla
         run: docker build -t devops-app-resmi .
