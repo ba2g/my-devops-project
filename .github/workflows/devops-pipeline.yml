@@ -25,6 +25,15 @@ jobs:
         run: |
           javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
+          
+          - name: Kod Kalite Kontrol (Test)
+        run: |
+          if grep -q "DevOps" app/MerhabaDevops.java; then
+            echo "✅ Test Basarili: Kod icinde DevOps anahtar kelimesi bulundu."
+          else
+            echo "❌ Test Basarisiz: Kod icinde 'DevOps' kelimesi eksik!"
+            exit 1
+          fi
 
       - name: Docker Hub'a Login Ol
         uses: docker/login-action@v3
