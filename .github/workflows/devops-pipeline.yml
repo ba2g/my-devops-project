@@ -25,3 +25,5 @@ jobs:
         run: |
           javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
+          - name: Docker Imajini Hazirla
+        run: docker build -t devops-app-resmi .
