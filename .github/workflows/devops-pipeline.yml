@@ -25,8 +25,8 @@ jobs:
         run: |
           javac app/MerhabaDevops.java
           java -cp app MerhabaDevops
-          
-          - name: Kod Kalite Kontrol (Test)
+
+      - name: Kod Kalite Kontrol (Test)
         run: |
           if grep -q "DevOps" app/MerhabaDevops.java; then
             echo "✅ Test Basarili: Kod icinde DevOps anahtar kelimesi bulundu."
